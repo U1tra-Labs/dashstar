@@ -1,22 +1,27 @@
-import React from "react";
-import AssetSwitch from './AssetSwitch';
+import React, { useState } from "react";
+import { Switch } from "@headlessui/react";
+import InitObligation from "./InitObligation";
+import SupplyReserveLiquidity from "./SupplyReserveLiquidity";
+import BorrowObligationLiquidity from "./BorrowObligationLiquidity";
+import RepayObligationLiquidity from "./RepayObligationLiquidity";
+import WithdrawObligationCollateral from "./WithdrawObligationCollateral";
+import { AnchorProvider } from "@project-serum/anchor";
+import Positions from "./Positions";
 
-type Prop = {
-  title: string;
-  data: {
-    image: any;
-    name: string;
-    apy: number;
-    amount: number;
-    short: string;
-    id: number;
-  }[];
-  isLiquidity?: boolean;
-  enabledAsset: number | null;
-  toggleSwitch: (id: number) => void;
-};
 
-const AssetCard = ({ title, data, isLiquidity, enabledAsset, toggleSwitch }: Prop) => {
+const AssetCard = ({ title, data, isLiquidity, provider, callback }: Prop) => {
+  const [enabledAssets, setEnabledAssets] = useState<number[]>([]);
+
+  const toggleSwitch = (assetId: number) => {
+    setEnabledAssets((prevAssets) => {
+      if (prevAssets.includes(assetId)) {
+        return prevAssets.filter((id) => id !== assetId);
+      } else {
+        return [...prevAssets, assetId];
+      }
+    });
+  };
+
   return (
     <div className="flex flex-col items-start">
       <div className="relative">
@@ -60,7 +65,34 @@ const AssetCard = ({ title, data, isLiquidity, enabledAsset, toggleSwitch }: Pro
                   {isLiquidity && <div className="text-start px-2 text-[15px] font-medium">${item.liquidity}M</div>}
                   {!isLiquidity && (
                     <div>
-                      <AssetSwitch enabledAsset={enabledAsset} item={item} toggleSwitch={toggleSwitch} />
+<Switch
+  checked={enabledAssets.includes(item.id)}
+  onChange={() => {
+    if (enabledAssets.includes(item.id)) {
+      console.log(`Switch with ID ${item.id} toggled OFF`);
+    } else {
+      console.log(`Switch with ID ${item.id} toggled ON`);
+    }
+    toggleSwitch(item.id);
+  }}
+  className={`${
+    enabledAssets.includes(item.id)
+      ? "bg-[#1C2442] borders"
+      : "bg-[#1C2442] border border-gray-800"
+  } relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+>
+  <span className="sr-only">Use setting</span>
+  <span
+    aria-hidden="true"
+    className={`${
+      enabledAssets.includes(item.id)
+        ? "translate-x-9 bg-gradient-to-r from-[#9945ff] to-[#14f915]"
+        : "translate-x-0 bg-gray-600"
+    }
+    pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out`}
+  />
+</Switch>
+
                     </div>
                   )}
                 </td>
