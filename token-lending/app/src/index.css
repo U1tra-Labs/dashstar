@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply bg-[#1C2442] text-white bg-hero-pattern bg-cover bg-no-repeat overflow-x-hidden;
+}
+
+.button {
+  border-radius: 100rem;
+  padding: 8px 16px;
+  box-shadow: 0px 4px 15px 0px rgba(43, 43, 43, 0.25);
+  border: solid 1px transparent;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #9945FF, #14F195);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #151726 inset;
+}
+
+.border {
+  box-shadow: 0px 4px 15px 0px rgba(43, 43, 43, 0.25);
+  border: solid 1px transparent;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #9945FF, #14F195);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #151726 inset;
+}
+
+.borders {
+  box-shadow: 0px 4px 15px 0px rgba(43, 43, 43, 0.25);
+  border: solid 1px transparent;
+  background-image: linear-gradient(#1C2442, #1C2442), linear-gradient(101deg, #9945FF, #14F195);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #151726 inset;
+}
+
+.cardborder {
+  flex-shrink: 0;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 1) !important;
+  background: var(--gradient,
+      linear-gradient(90deg, rgba(153, 69, 255, 0.3) 0%, rgba(20, 241, 149, 0.3) 100%));
+  padding: 22px 22px;
+}
+
+.box {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.box .group-wrapper {
+  border: 0px none;
+  height: 196px;
+  width: 196px;
+}
+
+.box .group {
+  height: 196px;
+  left: 0;
+  /* position: fixed; */
+  top: 0;
+  width: 196px;
+}
+
+.box .overlap {
+  height: 196px;
+  position: relative;
+}
+
+.box .vector {
+  height: 136px;
+  left: 30px;
+  position: absolute;
+  top: 30px;
+  width: 136px;
+}
+
+.box .overlap-group-wrapper {
+  background-image: url(./assets/circle.svg);
+  background-size: 100% 100%;
+  height: 196px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 196px;
+}
+
+.box .overlap-group {
+  background-image: url(./assets/Group\ 28.svg);
+  background-size: 100% 100%;
+  height: 174px;
+  left: 11px;
+  position: relative;
+  top: 11px;
+  width: 174px;
+}
+
+.box .ellipse {
+  background-color: var(--bg-color-dark);
+  border-radius: 66px;
+  height: 132px;
+  left: 21px;
+  position: absolute;
+  top: 21px;
+  width: 132px;
+}
+
+.box .frame {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 39px;
+  position: absolute;
+  top: 40px;
+  background-image: url(./assets/Ellipse\ 1.svg);
+}
+
+.box .text-wrapper {
+  color: var(--primary-color);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.box .div {
+  color: var(--secondary-color);
+  font-family: var(--title-6-18-font-family);
+  font-size: var(--title-6-18-font-size);
+  font-style: var(--title-6-18-font-style);
+  font-weight: var(--title-6-18-font-weight);
+  letter-spacing: var(--title-6-18-letter-spacing);
+  line-height: var(--title-6-18-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+
+
+.cardborder-content {
+  background: linear-gradient(90deg, #9945FF 0%, #14F195 100%);
+  padding: 6px;
+}
+
+.cardborder-content2 {
+  background: linear-gradient(90deg, #9945FF 0%, #14F195 100%);
+  width: 2px;
+  height: 126px;
+}
+
+.cardborder-content3 {
+  background: linear-gradient(90deg, #9945FF 0%, #14F195 100%);
+  width: 100%;
+  height: 1px;
+}
