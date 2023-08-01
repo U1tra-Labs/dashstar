@@ -42,21 +42,30 @@ export const Assets = [
       liquidity: 0
     },
     {
+      image: require("../assets/mSol.png"),
+      name: "mSOL",
+      apy: 0,
+      amount: 0,
+      short: "mSOL",
+      id: 4,
+      liquidity: 0
+    },
+    {
       image: require("../assets/Bitcoin 1.png"),
       name: "Bitcoin",
       apy: 0,
       amount: 0,
       short: "BTC",
-      id: 4,
+      id: 5,
       liquidity: 0
     },
     {
-      image: require("../assets/neon.jpg"),
-      name: "Neon",
+      image: require("../assets/arbitrum.png"),
+      name: "Arbitrum",
       apy: 0,
       amount: 0,
-      short: "NEON",
-      id: 5,
+      short: "ARB",
+      id: 6,
       liquidity: 0
 
     },
@@ -66,9 +75,10 @@ export const Assets = [
       apy: 0,
       amount: 0,
       short: "USDC",
-      id: 6,
+      id: 7,
       liquidity: 0
     },
+
   ];
 
   

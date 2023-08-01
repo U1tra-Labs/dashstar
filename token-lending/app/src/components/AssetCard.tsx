@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import { Switch } from "@headlessui/react";
-import InitObligation from "./InitObligation";
+import { useInitObligation } from "./InitObligation";
 import SupplyReserveLiquidity from "./SupplyReserveLiquidity";
 import BorrowObligationLiquidity from "./BorrowObligationLiquidity";
 import RepayObligationLiquidity from "./RepayObligationLiquidity";
 import WithdrawObligationCollateral from "./WithdrawObligationCollateral";
 import { AnchorProvider } from "@project-serum/anchor";
-import Positions from "./Positions";
 
 
-const AssetCard = ({ title, data, isLiquidity, provider, callback }: Prop) => {
+
+const AssetCard = ({ title, data, isLiquidity, provider, callback, reserve }: Prop) => {
   const [enabledAssets, setEnabledAssets] = useState<number[]>([]);
+  const [showSupplyReserveModal, setShowSupplyReserveModal] = useState(false);
+  const { initObligation } = useInitObligation();  // Hook here
+
 
   const toggleSwitch = (assetId: number) => {
     setEnabledAssets((prevAssets) => {
       if (prevAssets.includes(assetId)) {
         return prevAssets.filter((id) => id !== assetId);
       } else {
+        // Call the initObligation function when the asset is enabled
+        initObligation({reserve});
         return [...prevAssets, assetId];
       }
     });
   };
+
 
   return (
     <div className="flex flex-col items-start">
@@ -67,11 +73,12 @@ const AssetCard = ({ title, data, isLiquidity, provider, callback }: Prop) => {
                     <div>
 <Switch
   checked={enabledAssets.includes(item.id)}
-  onChange={() => {
+  onChange={async () => {
     if (enabledAssets.includes(item.id)) {
       console.log(`Switch with ID ${item.id} toggled OFF`);
     } else {
       console.log(`Switch with ID ${item.id} toggled ON`);
+      setShowSupplyReserveModal(true);  // Show the SupplyReserveLiquidity modal
     }
     toggleSwitch(item.id);
   }}
@@ -91,8 +98,20 @@ const AssetCard = ({ title, data, isLiquidity, provider, callback }: Prop) => {
     }
     pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out`}
   />
-</Switch>
-
+                     </Switch>
+                      {showSupplyReserveModal && (
+                        <SupplyReserveLiquidity
+                          element={item}
+                          provider={provider}
+                          callback={() => {
+                            initObligation({ reserve: undefined });
+                            setShowSupplyReserveModal(false);
+                            if (callback) {
+                              callback();
+                            }
+                          }}
+                        />
+                      )}
                     </div>
                   )}
                 </td>
