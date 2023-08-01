@@ -234,8 +234,13 @@ export default function SupplyReserveLiquidity({
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => supplyReserve(element)}>
-                    Deposit
+                <Button variant="primary" onClick={() => {
+                supplyReserve(element);
+                if (callback) {
+                    callback();
+                  }
+                }}>
+                Deposit
                 </Button>
                 </Modal.Footer>
             </Modal>
